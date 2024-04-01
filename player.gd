@@ -5,22 +5,19 @@ const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.005
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = 6.8
-
-
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 
 func _ready():
-	print("hello")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -44,8 +41,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-
-
-func _on_button_body_entered(body):
-	print("hello")
-	pass # Replace with function body.
+func _on_finish_body_entered(body):
+	if body == self:
+		print("Finish")
+		velocity.y += 5
