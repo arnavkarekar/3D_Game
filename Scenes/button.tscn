@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccbclg8vrknbp"]
+
+[ext_resource type="Script" path="res://Scenes/button.gd" id="1_usrci"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xye7t"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8vds"]
+albedo_color = Color(0.427451, 0.862745, 0.337255, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cjf8"]
+albedo_color = Color(0.980392, 0, 0.137255, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d2sg0"]
+
+[node name="button" type="Area3D"]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_usrci")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.15482, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_xye7t")
+
+[node name="Green" type="CSGBox3D" parent="."]
+transform = Transform3D(0.847757, 0, 0, 0, 0.254271, 0, 0, 0, 0.831813, 0, 0.0836783, 0)
+material_override = SubResource("StandardMaterial3D_y8vds")
+
+[node name="Red" type="CSGBox3D" parent="."]
+transform = Transform3D(0.847757, 0, 0, 0, 0.168561, 0, 0, 0, 0.831813, 0, 0.0545954, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_2cjf8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.15635, 0, 0, 0, 0.88565, 0, 0, 0, 1, 0, 0.0558796, 0)
+shape = SubResource("BoxShape3D_d2sg0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

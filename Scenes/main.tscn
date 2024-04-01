@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcri0ms4jpo0b"]
+
+[ext_resource type="MeshLibrary" uid="uid://dkg8pof1sv0lx" path="res://assets/blocks.tres" id="1_f87hf"]
+[ext_resource type="PackedScene" uid="uid://6rejc6jnkefy" path="res://Scenes/player.tscn" id="2_q2l1m"]
+[ext_resource type="PackedScene" uid="uid://ccbclg8vrknbp" path="res://Scenes/button.tscn" id="3_3cn5w"]
+
+[sub_resource type="Environment" id="Environment_3c2a5"]
+background_mode = 1
+
+[node name="main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.947165, 0.237272, -0.215824, 0.307173, -0.47734, 0.823281, 0.0923197, -0.846078, -0.525004, 1.7945, 11.2443, -5.84057)
+shadow_enabled = true
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_f87hf")
+data = {
+"cells": PackedInt32Array(0, 0, 0, 2, 65534, 2, 65534, 65534, 1048578, 65534, 2, 655362, 2, 2, 1441794, 2, 0, 1, 0, 2, 1441793, 65534, 0, 655361, 0, 65534, 3, 0, 65531, 0, 0, 65528, 0, 0, 65525, 1441792, 0, 65522, 1441792, 0, 65519, 655363, 65534, 65519, 655362, 0, 65517, 1048576, 65534, 65515, 1048578, 2, 65515, 2, 2, 65519, 1441794, 65534, 65517, 655361, 0, 65515, 1048577, 2, 65517, 1, 65536, 65517, 4)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3c2a5")
+
+[node name="player" parent="." instance=ExtResource("2_q2l1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 1)
+
+[node name="button" parent="." instance=ExtResource("3_3cn5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, -2.5)
+
+[node name="button2" parent="." instance=ExtResource("3_3cn5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -2.5)
+
+[node name="button3" parent="." instance=ExtResource("3_3cn5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1, -2.5)
+
+[connection signal="body_entered" from="button" to="player" method="_on_button_body_entered"]
