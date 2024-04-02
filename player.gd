@@ -12,6 +12,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	camera.rotation.x = Global.playerRotation.x
+	camera.rotation.y = Global.playerRotation.y
+	
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -40,8 +43,3 @@ func _physics_process(delta):
 		velocity.z = 0.0
 
 	move_and_slide()
-
-func _on_finish_body_entered(body):
-	if body == self:
-		print("Finish")
-		velocity.y += 5
