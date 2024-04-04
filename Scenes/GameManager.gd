@@ -3,7 +3,7 @@ extends Node3D
 @onready var buttons = get_tree().get_nodes_in_group("Button")
 @onready var player = $player
 
-var level_change_height = 200
+var enter_velocity = 5
 
 var finished = false
 
@@ -13,26 +13,23 @@ func button_entered(body):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player.velocity.y = -50
+	player.velocity.y = -enter_velocity
 	for button in buttons:
 		button.body_entered.connect(button_entered)
 		print(button.name)
 
 # Called very frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	updatePlayerHeight()
-
-# Function to update player height
-func updatePlayerHeight():
-	if finished and player.position.y >= level_change_height:
-		change_scene()
+	if finished and player.velocity.y <= enter_velocity:
+		change_scene("level1")
 
 # Function called when player reaches target height
-func change_scene():
+func change_scene(scene_name):
 	Global.playerRotation = Vector2(player.camera.rotation.x, player.camera.rotation.y)
-	get_tree().change_scene_to_file("res://Scenes/level2.tscn")
+	Global.playerHeight = player.position.y
+	get_tree().change_scene_to_file("res://Levels/%s.tscn" % scene_name)
 
 func _on_finish_body_entered(body):
 	if body == player:
 		finished = true
-		player.velocity.y = 100
+		player.velocity.y = 50
