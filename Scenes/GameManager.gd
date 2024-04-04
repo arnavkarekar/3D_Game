@@ -4,7 +4,6 @@ extends Node3D
 @onready var player = $player
 
 var enter_velocity = 5
-
 var finished = false
 
 func button_entered(body):
@@ -21,7 +20,8 @@ func _ready():
 # Called very frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if finished and player.velocity.y <= enter_velocity:
-		change_scene("level1")
+		Global.level += 1
+		change_scene("level%d" % Global.level)
 
 # Function called when player reaches target height
 func change_scene(scene_name):
