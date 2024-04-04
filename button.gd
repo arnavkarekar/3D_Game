@@ -16,3 +16,7 @@ func click():
 func _on_body_entered(body):
 	if body.name == "player":
 		click()
+
+func _on_body_exited(body):
+	if body.name == "player":
+		click()
