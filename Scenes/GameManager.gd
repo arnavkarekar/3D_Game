@@ -2,8 +2,10 @@ extends Node3D
 
 @onready var buttons = get_tree().get_nodes_in_group("Button")
 @onready var player = $player
+@onready var start_pos = player.position
 
 var enter_velocity = 5
+var respawn_height = -100
 var finished = false
 
 func button_entered(body):
@@ -19,6 +21,9 @@ func _ready():
 
 # Called very frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if player.position.y <= respawn_height:
+		player.set_position(start_pos)
+	
 	if finished and player.velocity.y <= enter_velocity:
 		Global.level += 1
 		change_scene("level%d" % Global.level)
