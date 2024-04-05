@@ -14,27 +14,25 @@ func button_entered(body):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player.velocity.y = -enter_velocity
+	player.velocity.y = Global.playerVelocity
 	for button in buttons:
 		button.body_entered.connect(button_entered)
 		print(button.name)
 
 # Called very frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if player.position.y <= respawn_height:
-		player.set_position(start_pos)
-	
-	if finished and player.velocity.y <= enter_velocity:
+	if finished and player.position.y <= respawn_height:
 		Global.level += 1
 		change_scene("level%d" % Global.level)
+	elif not finished and player.position.y <= respawn_height:
+		player.set_position(start_pos)
 
 # Function called when player reaches target height
 func change_scene(scene_name):
 	Global.playerRotation = Vector2(player.camera.rotation.x, player.camera.rotation.y)
-	Global.playerHeight = player.position.y
+	Global.playerVelocity = player.velocity.y
 	get_tree().change_scene_to_file("res://Levels/%s.tscn" % scene_name)
 
 func _on_finish_body_entered(body):
 	if body == player:
 		finished = true
-		player.velocity.y = 50

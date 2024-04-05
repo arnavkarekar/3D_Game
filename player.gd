@@ -14,7 +14,6 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.rotation.x = Global.playerRotation.x
 	camera.rotation.y = Global.playerRotation.y
-	position.y = Global.playerHeight
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:

@@ -1,7 +1,7 @@
 extends Node
 
 var playerRotation : Vector2
-var playerHeight : float = 100
+var playerVelocity : float
 var level : int = 1
 
 # Called when the node enters the scene tree for the first time.
