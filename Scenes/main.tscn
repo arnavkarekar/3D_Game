@@ -1,0 +1,110 @@
+[gd_scene load_steps=14 format=3 uid="uid://dcri0ms4jpo0b"]
+
+[ext_resource type="MeshLibrary" uid="uid://dkg8pof1sv0lx" path="res://assets/blocks.tres" id="1_f87hf"]
+[ext_resource type="Script" path="res://Scenes/GameManager.gd" id="1_k7fko"]
+[ext_resource type="PackedScene" uid="uid://6rejc6jnkefy" path="res://Scenes/player.tscn" id="2_q2l1m"]
+[ext_resource type="Texture2D" uid="uid://inhnsrp34cpy" path="res://fx_cloudalpha04.png" id="2_rivkw"]
+[ext_resource type="PackedScene" uid="uid://ccbclg8vrknbp" path="res://Scenes/button.tscn" id="3_3cn5w"]
+[ext_resource type="PackedScene" uid="uid://bmvwlslbcbns2" path="res://Scenes/platform.tscn" id="4_qgeyv"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jmg8m"]
+emission_shape = 3
+emission_box_extents = Vector3(1000, 50, 1000)
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xidkm"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("2_rivkw")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_wh7a0"]
+material = SubResource("StandardMaterial3D_xidkm")
+size = Vector2(10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mrofq"]
+size = Vector3(2000, 100, 2000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpli8"]
+backlight_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_l3ooq"]
+size = Vector3(2000, 1, 2000)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kf34w"]
+size = Vector3(3, 1, 3)
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_k7fko")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Area3D"]
+amount = 1000000
+lifetime = 30.0
+explosiveness = 0.98
+visibility_aabb = AABB(-4, -184.6, -253.515, 1000, 1000, 1000)
+process_material = SubResource("ParticleProcessMaterial_jmg8m")
+draw_pass_1 = SubResource("QuadMesh_wh7a0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_mrofq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+material_override = SubResource("StandardMaterial3D_wpli8")
+mesh = SubResource("BoxMesh_l3ooq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.619341, 0.742748, -0.254444, 0, 0.324082, 0.946029, 0.785122, -0.585915, 0.200717, 0.00341952, 0, -5.37634e-05)
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_f87hf")
+data = {
+"cells": PackedInt32Array(0, 0, 0, 2, 65534, 2, 65534, 65534, 1048578, 65534, 2, 655362, 2, 2, 1441794, 2, 0, 1, 0, 2, 1441793, 65534, 0, 655361, 65534, 65519, 655362, 65534, 65515, 1048578, 65534, 65517, 655361, 2, 65517, 1, 2, 65519, 1441794, 2, 65515, 2, 0, 65515, 1048577, 0, 65519, 655360, 0, 65534, 655360, 0, 65517, 4)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="player" parent="." instance=ExtResource("2_q2l1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 200, 1)
+
+[node name="button" parent="." groups=["Button"] instance=ExtResource("3_3cn5w")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.13602, 1, -3.16345)
+
+[node name="button2" parent="." groups=["Button"] instance=ExtResource("3_3cn5w")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.13314, 1, -1.66346)
+
+[node name="button3" parent="." groups=["Button"] instance=ExtResource("3_3cn5w")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.13026, 1, -0.163459)
+
+[node name="Finish" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -35.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Finish"]
+shape = SubResource("BoxShape3D_kf34w")
+
+[node name="Platform" parent="." instance=ExtResource("4_qgeyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -10)
+freeze = true
+freeze_mode = 1
+
+[node name="Platform2" parent="." instance=ExtResource("4_qgeyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -18.2683)
+freeze = true
+freeze_mode = 1
+
+[node name="Platform3" parent="." instance=ExtResource("4_qgeyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -25.8414)
+freeze = true
+freeze_mode = 1
+
+[connection signal="body_entered" from="button" to="." method="_on_button_body_entered"]
+[connection signal="body_exited" from="button" to="." method="_on_button_body_exited"]
+[connection signal="body_entered" from="button2" to="." method="_on_button_2_body_entered"]
+[connection signal="body_exited" from="button2" to="." method="_on_button_2_body_exited"]
+[connection signal="body_entered" from="button3" to="." method="_on_button_3_body_entered"]
+[connection signal="body_exited" from="button3" to="." method="_on_button_3_body_exited"]
+[connection signal="body_entered" from="Finish" to="." method="_on_finish_body_entered"]

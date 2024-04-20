@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmvwlslbcbns2"]
+[gd_scene load_steps=5 format=3 uid="uid://bmvwlslbcbns2"]
+
+[ext_resource type="Script" path="res://Scripts/platform.gd" id="1_34ky2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2v1ty"]
 albedo_color = Color(1, 0.733333, 0.556863, 1)
@@ -10,6 +12,7 @@ size = Vector3(4, 1, 4)
 size = Vector3(4, 1, 4)
 
 [node name="Platform" type="RigidBody3D"]
+script = ExtResource("1_34ky2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_2v1ty")
