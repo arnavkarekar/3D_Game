@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cj2n4sairm7at"]
+[gd_scene load_steps=9 format=3 uid="uid://cj2n4sairm7at"]
 
 [ext_resource type="Script" path="res://Scenes/GameManager.gd" id="1_fdr7q"]
 [ext_resource type="MeshLibrary" uid="uid://dkg8pof1sv0lx" path="res://assets/blocks.tres" id="2_r7fdk"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ccbclg8vrknbp" path="res://Scenes/button.tscn" id="4_kte35"]
 [ext_resource type="PackedScene" uid="uid://bmvwlslbcbns2" path="res://Scenes/platform.tscn" id="5_tiojw"]
 [ext_resource type="PackedScene" uid="uid://ci7xc5m7w6byr" path="res://Scenes/cloud.tscn" id="6_inaki"]
+[ext_resource type="AudioStream" uid="uid://5a58ypd6a84f" path="res://Sounds/C418 Haggstrom Minecraft Volume Alpha.mp3" id="7_n45oj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kf34w"]
 size = Vector3(3, 1, 3)
@@ -25,7 +26,7 @@ light_angular_distance = 90.0
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("2_r7fdk")
 data = {
-"cells": PackedInt32Array(0, 0, 0, 2, 65534, 2, 65534, 65534, 1048578, 65534, 2, 655362, 2, 2, 1441794, 2, 0, 1, 0, 2, 1441793, 65534, 0, 655361, 65534, 65519, 655362, 65534, 65515, 1048578, 65534, 65517, 655361, 2, 65517, 1, 2, 65519, 1441794, 2, 65515, 2, 0, 65515, 1048577, 0, 65519, 655360, 0, 65534, 655360)
+"cells": PackedInt32Array(0, 0, 0, 2, 65534, 2, 65534, 65534, 1048578, 65534, 2, 655362, 2, 2, 1441794, 2, 0, 1, 0, 2, 1441793, 65534, 0, 655361, 65534, 65519, 655362, 65534, 65515, 1048578, 65534, 65517, 655361, 2, 65517, 1, 2, 65519, 1441794, 2, 65515, 2, 0, 65515, 1048577, 0, 65519, 655360, 0, 65534, 655360, 0, 65517, 0)
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
@@ -36,10 +37,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 100, 1)
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.13602, 1, -3.16345)
 
 [node name="button2" parent="." groups=["Button"] instance=ExtResource("4_kte35")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.13314, 1, -1.66346)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.11969, 0.957143, -3.10353)
 
 [node name="button3" parent="." groups=["Button"] instance=ExtResource("4_kte35")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.13026, 1, -0.163459)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.13026, 1, 5.16365)
+
+[node name="button4" parent="." groups=["Button"] instance=ExtResource("4_kte35")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -3.17796, 1, 5.19191)
 
 [node name="Finish" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -35.5)
@@ -48,17 +52,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -35.5)
 shape = SubResource("BoxShape3D_kf34w")
 
 [node name="Platform" parent="." instance=ExtResource("5_tiojw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -7.99897)
 freeze = true
 freeze_mode = 1
 
 [node name="Platform2" parent="." instance=ExtResource("5_tiojw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -18.2683)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -14.0649)
 freeze = true
 freeze_mode = 1
 
 [node name="Platform3" parent="." instance=ExtResource("5_tiojw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -25.8414)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -20.2012)
+freeze = true
+freeze_mode = 1
+
+[node name="Platform4" parent="." instance=ExtResource("5_tiojw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.957996, 0.95505, -26.569)
 freeze = true
 freeze_mode = 1
 
@@ -104,4 +113,16 @@ transform = Transform3D(-9.51846, -3.06576, -1.34009e-08, 3.06576, -9.51846, -8.
 [node name="Cloud6" parent="Clouds2" instance=ExtResource("6_inaki")]
 transform = Transform3D(-0.56989, -9.98375, -4.36403e-08, 9.98375, -0.56989, -4.62025e-08, 4.36404e-07, -4.62024e-07, 1, 4.143, -25.998, 6.855)
 
+[node name="backgroundMusic" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_n45oj")
+autoplay = true
+
+[connection signal="body_entered" from="button" to="." method="_on_button_body_entered"]
+[connection signal="body_exited" from="button" to="." method="_on_button_body_exited"]
+[connection signal="body_entered" from="button2" to="." method="_on_button_2_body_entered"]
+[connection signal="body_exited" from="button2" to="." method="_on_button_2_body_exited"]
+[connection signal="body_entered" from="button3" to="." method="_on_button_3_body_entered"]
+[connection signal="body_exited" from="button3" to="." method="_on_button_3_body_exited"]
+[connection signal="body_entered" from="button4" to="." method="_on_button_4_body_entered"]
+[connection signal="body_exited" from="button4" to="." method="_on_button_4_body_exited"]
 [connection signal="body_entered" from="Finish" to="." method="_on_finish_body_entered"]

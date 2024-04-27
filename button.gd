@@ -2,6 +2,8 @@ extends Area3D
 
 @onready var green = $Green
 @onready var red = $Red
+@onready var button = $buttonClick
+var time = 7
 
 func _ready():
 	pass
@@ -15,4 +17,16 @@ func click():
 
 func _on_body_entered(body):
 	if body.name == "player":
-		click()
+		button.play()
+		red.visible = true
+		green.visible = false
+
+
+
+
+
+func _on_body_exited(body):
+	if body.name == "player":
+		await get_tree().create_timer(time).timeout
+		red.visible = false
+		green.visible = true
