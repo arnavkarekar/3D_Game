@@ -3,9 +3,13 @@ extends Node3D
 
 @onready var player = $player
 @onready var start_pos = player.position
-@onready var button1 = get_node("button")
-@onready var gridmap = get_node("GridMap")
-
+@onready var platform1 = $Platform
+@onready var platform2 = $Platform2
+@onready var platform3 = $Platform3
+@onready var platform4 = $Platform4
+@onready var bgmusic = $backgroundMusic
+@onready var levelup = $levelUp
+var time = 10
 var enter_velocity = 5
 var respawn_height = -100
 var level_change_height = 200
@@ -15,6 +19,12 @@ var state = [0,0,0]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	bgmusic.play()
+	platform1.position.y=-10
+	platform2.position.y=-10
+	platform3.position.y=-10
+	if platform4:
+		platform4.position.y=-10
 	player.velocity.y = Global.playerVelocity
 	for button in buttons:
 		button.body_entered.connect(button_entered)
@@ -22,7 +32,6 @@ func _ready():
 
 # Called very frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	updatePlayerHeight()
 	if finished and player.position.y <= respawn_height:
 		Global.level += 1
 		change_scene("level%d" % Global.level)
@@ -39,26 +48,45 @@ func change_scene(scene_name):
 	Global.playerRotation = Vector2(player.camera.rotation.x, player.camera.rotation.y)
 	Global.playerVelocity = player.velocity.y
 	get_tree().change_scene_to_file("res://Levels/%s.tscn" % scene_name)
+	#bgmusic
 
 func _on_finish_body_entered(body):
 	if body == player:
+		levelup.play()
 		finished = true
-		player.velocity.y = 100
-
+		
 func _on_button_body_entered(body):
-	if body != gridmap:
-		state[0]=1
+	if body == player:
+		platform1.position.y=0.5
+
 func _on_button_body_exited(body):
-	state[0]=0
+	if body == player:
+		await get_tree().create_timer(time).timeout
+		platform1.position.y=-10
 
 func _on_button_2_body_entered(body):
-	if body != gridmap:
-		state[1]=1
+	if body == player:
+		platform2.position.y=0.5
+
 func _on_button_2_body_exited(body):
-	state[1]=0
+	if body == player:
+		await get_tree().create_timer(time).timeout
+		platform2.position.y=-10
 
 func _on_button_3_body_entered(body):
-	if body != gridmap:
-		state[2]=1
+	if body == player:
+		platform3.position.y=0.5 # Replace 
+
 func _on_button_3_body_exited(body):
-	state[2]=0
+	if body == player:
+		await get_tree().create_timer(time).timeout
+		platform3.position.y=-10
+
+func _on_button_4_body_entered(body):
+	if body == player:
+		platform4.position.y=0.5 # Replace 
+
+func _on_button_4_body_exited(body):
+	if body == player:
+		await get_tree().create_timer(time).timeout
+		platform4.position.y=-10
