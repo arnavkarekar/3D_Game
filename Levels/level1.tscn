@@ -109,7 +109,7 @@ transform = Transform3D(-0.56989, -9.98375, -4.36403e-08, 9.98375, -0.56989, -4.
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.999898, 0.0138784, -0.00335649, -0.00478037, 0.546887, 0.837193, 0.0134545, -0.837092, 0.546897, -20.7391, 245.115, 302.623)
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(0.999898, 0.0138784, -0.00335649, -0.00478037, 0.546887, 0.837193, 0.0134545, -0.837092, 0.546897, -20.7391, 245.115, 302.623)
 
 [node name="backgroundMusic" type="AudioStreamPlayer3D" parent="."]

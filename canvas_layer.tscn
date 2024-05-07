@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://w0eenxdh3g50"]
 
-[ext_resource type="PackedScene" uid="uid://dcri0ms4jpo0b" path="res://Levels/level1.tscn" id="1_2brrk"]
+[ext_resource type="PackedScene" uid="uid://dcri0ms4jpo0b" path="res://Scenes/main.tscn" id="1_2brrk"]
 [ext_resource type="FontFile" uid="uid://c3y48ugk7x8hm" path="res://VeniteAdoremusStraight-Yzo6v.ttf" id="2_c82ds"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iyojp"]

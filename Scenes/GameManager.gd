@@ -26,9 +26,6 @@ func _ready():
 	if platform4:
 		platform4.position.y=-10
 	player.velocity.y = Global.playerVelocity
-	for button in buttons:
-		button.body_entered.connect(button_entered)
-		print(button.name)
 
 # Called very frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -41,7 +38,7 @@ func _process(delta):
 # Function to update player height
 func updatePlayerHeight():
 	if finished and player.position.y >= level_change_height:
-		change_scene()
+		change_scene("level2")
 
 # Function called when player reaches target height
 func change_scene(scene_name):
