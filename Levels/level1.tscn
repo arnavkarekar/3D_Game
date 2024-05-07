@@ -106,6 +106,12 @@ transform = Transform3D(-9.51846, -3.06576, -1.34009e-08, 3.06576, -9.51846, -8.
 [node name="Cloud6" parent="Clouds2" instance=ExtResource("6_m22a3")]
 transform = Transform3D(-0.56989, -9.98375, -4.36403e-08, 9.98375, -0.56989, -4.62025e-08, 4.36404e-07, -4.62024e-07, 1, 4.143, -25.998, 6.855)
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999898, 0.0138784, -0.00335649, -0.00478037, 0.546887, 0.837193, 0.0134545, -0.837092, 0.546897, -20.7391, 245.115, 302.623)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999898, 0.0138784, -0.00335649, -0.00478037, 0.546887, 0.837193, 0.0134545, -0.837092, 0.546897, -20.7391, 245.115, 302.623)
+
 [node name="backgroundMusic" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_vfirs")
 autoplay = true

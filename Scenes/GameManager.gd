@@ -54,6 +54,14 @@ func _on_finish_body_entered(body):
 	if body == player:
 		levelup.play()
 		finished = true
+	
+
+
+func _on_start_button_pressed():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	print("Hello Yabba") 
+	change_scene("level1")
+	
 		
 func _on_button_body_entered(body):
 	if body == player:
