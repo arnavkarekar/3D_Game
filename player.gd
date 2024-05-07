@@ -11,7 +11,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera = $Head/Camera3D
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	# Replace with function body.
 	camera.rotation.x = Global.playerRotation.x
 	camera.rotation.y = Global.playerRotation.y
 

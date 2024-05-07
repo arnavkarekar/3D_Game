@@ -1,0 +1,127 @@
+[gd_scene load_steps=10 format=3 uid="uid://w0eenxdh3g50"]
+
+[ext_resource type="PackedScene" uid="uid://dcri0ms4jpo0b" path="res://Levels/level1.tscn" id="1_2brrk"]
+[ext_resource type="FontFile" uid="uid://c3y48ugk7x8hm" path="res://VeniteAdoremusStraight-Yzo6v.ttf" id="2_c82ds"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iyojp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uhffy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_akatj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5fer3"]
+
+[sub_resource type="Animation" id="Animation_2x7jh"]
+resource_name = "CameraMovement"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D/SubViewportContainer/SubViewport/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-81.9891, 277.115, 260.623), Vector3(-20.7391, 245.115, 302.623), Vector3(120.445, 245.115, 302.623), Vector3(182.784, 245.115, 302.623), Vector3(149.568, 245.115, 302.623)]
+}
+
+[sub_resource type="Animation" id="Animation_812n4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D/SubViewportContainer/SubViewport/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-20.7391, 245.115, 302.623)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mkk7l"]
+_data = {
+"CameraMovement": SubResource("Animation_2x7jh"),
+"RESET": SubResource("Animation_812n4")
+}
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="main" parent="Node3D" instance=ExtResource("1_2brrk")]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Node3D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Node3D/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Node3D/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -20.7391, 245.115, 302.623)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 2.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_c82ds")
+theme_override_font_sizes/font_size = 48
+text = "SkyBox"
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 160)
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_c82ds")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxEmpty_iyojp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_uhffy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_akatj")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5fer3")
+text = "Start Game"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mkk7l")
+}
+
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/StartButton" to="Node3D/main" method="_on_start_button_pressed"]

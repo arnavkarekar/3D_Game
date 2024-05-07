@@ -3,6 +3,7 @@ extends Node3D
 @onready var buttons = get_tree().get_nodes_in_group("Button")
 @onready var player = $player
 @onready var start_pos = player.position
+#@onready var yabba = get_node("/root/Control/MarginContainer/VBoxContainer/StartButton")
 
 var enter_velocity = 5
 var respawn_height = -100
@@ -36,3 +37,11 @@ func change_scene(scene_name):
 func _on_finish_body_entered(body):
 	if body == player:
 		finished = true
+	
+
+
+func _on_start_button_pressed():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	print("Hello Yabba") 
+	change_scene("level1")
+	
